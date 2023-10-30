@@ -269,7 +269,7 @@ RGBMatrix::Options::Options() :
 #ifdef DEFAULT_HARDWARE
   hardware_mapping(DEFAULT_HARDWARE),
 #else
-  hardware_mapping("regular"),
+  hardware_mapping("vbscores"),
 #endif
 
   rows(32), cols(32), chain_length(1), parallel(1),
