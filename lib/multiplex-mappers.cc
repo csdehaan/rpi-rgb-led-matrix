@@ -454,6 +454,22 @@ public:
   }
 };
 
+class P5Outdoor64x32EighthScanMapper : public MultiplexMapperBase {
+public:
+  P5Outdoor64x32EighthScanMapper() : MultiplexMapperBase("P5Outdoor64x32EighthScan", 2) {}
+
+  void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
+    if(y > 15) {
+        *matrix_x = x + 64;
+        *matrix_y = y - 16;
+    }
+    else {
+        *matrix_x = x;
+        *matrix_y = y;
+    }
+  }
+};
+
 /*
  * Here is where the registration happens.
  * If you add an instance of the mapper here, it will automatically be
@@ -481,6 +497,7 @@ static MuxMapperList *CreateMultiplexMapperList() {
   result->push_back(new P8Outdoor1R1G1BMultiplexMapper());
   result->push_back(new FlippedStripeMultiplexMapper());
   result->push_back(new P10Outdoor32x16HalfScanMapper());
+  result->push_back(new P5Outdoor64x32EighthScanMapper());
   return result;
 }
 
