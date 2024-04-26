@@ -459,14 +459,12 @@ public:
   P5Outdoor64x32EighthScanMapper() : MultiplexMapperBase("P5Outdoor64x32EighthScan", 2) {}
 
   void MapSinglePanel(int x, int y, int *matrix_x, int *matrix_y) const {
-    if(y > 15) {
-        *matrix_x = x + 64;
-        *matrix_y = y - 16;
-    }
-    else {
-        *matrix_x = x;
-        *matrix_y = y;
-    }
+    int dx = x % 16;
+    int dy = y % 8;
+    int base = 32 * (x / 16);
+    int offset = ((y/8) % 2) == 0 ? 16 : 0;
+    *matrix_x = base + offset + dx;
+    *matrix_y = ((y / 16) * 8) + dy;
   }
 };
 
